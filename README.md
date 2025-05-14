@@ -13,17 +13,55 @@ This project implements a smart contract for the management of insurance policie
 ## Installation
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/CallejaJ/hyperledger-seguros.git
    cd hyperledger-seguros
+   ```
 
-# Hyperledger Fabric Chaincode Deployment Guide
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Install dependencies
+## Features
+
+- Policy Management (Create, Read, Update, Cancel)
+- Claims Registration and Processing
+- Premium Calculation
+- Private Data Handling
+- Policy History Tracking
+
+## Testing
+
+This project includes comprehensive unit tests with 95.6% code coverage.
+
+### Running Tests
 
 ```bash
-npm install
+# Run all tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests in watch mode
+npm run test:watch
+
+# Generate HTML coverage report
+npm run test:report
 ```
+
+### Test Coverage
+
+| Metric     | Coverage | Details |
+| ---------- | -------- | ------- |
+| Statements | 95.6%    | 87/91   |
+| Branches   | 92.85%   | 39/42   |
+| Functions  | 100%     | 12/12   |
+| Lines      | 95.6%    | 87/91   |
+
+For detailed testing documentation, see [TEST-README.md](./TEST-README.md).
 
 ## Deployment
 
@@ -77,11 +115,69 @@ peer chaincode invoke -o localhost:7050 \
 peer chaincode query -C mychannel -n seguros -c '{"function":"consultarPoliza","Args":["POL001"]}'
 ```
 
+### Registering a Claim
+
+```bash
+peer chaincode invoke -o localhost:7050 \
+  --ordererTLSHostnameOverride orderer.example.com \
+  --tls \
+  --cafile ${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem \
+  -C mychannel -n seguros \
+  --peerAddresses localhost:7051 \
+  --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt \
+  --peerAddresses localhost:9051 \
+  --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt \
+  -c '{"function":"registrarReclamacion","Args":["REC001", "POL001", "Collision damage", "500"]}'
+```
+
 ## Project Structure
 
-* `index.js` - Entry point for the chaincode
-* `lib/` - Directory containing the smart contract classes
+```
+hyperledger-seguros/
+├── index.js                    # Entry point for the chaincode
+├── lib/
+│   └── seguros-contract.js    # Main contract implementation
+├── test/
+│   └── seguros-contract.test.js # Unit tests
+├── package.json               # Node.js project configuration
+├── package-lock.json          # Dependency lock file
+├── README.md                  # This file
+└── TEST-README.md            # Detailed testing documentation
+```
+
+## Available Functions
+
+- `crearPoliza(id, titular, tipo, valor, duracion)` - Create a new insurance policy
+- `consultarPoliza(id)` - Query an existing policy
+- `registrarReclamacion(reclamacionId, polizaId, descripcion, monto)` - Register a claim
+- `procesarReclamacion(reclamacionId, polizaId, estado, comentario)` - Process a claim
+- `renovarPoliza(id, nuevaDuracion)` - Renew a policy
+- `cancelarPoliza(id, motivo)` - Cancel a policy
+- `calcularPrima(tipo, valor, historialRiesgo)` - Calculate insurance premium
+- `obtenerHistorialPoliza(id)` - Get policy history
+- `guardarDatosPrivados(polizaId, datosPrivados)` - Store private data
+- `obtenerDatosPrivados(polizaId)` - Retrieve private data
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Write tests for your changes
+4. Ensure all tests pass with coverage > 95%
+5. Commit your changes (`git commit -m 'Add some amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
 
 ## License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+CallejaJ
+
+## Acknowledgments
+
+- Hyperledger Fabric Community
+- Insurance domain experts who provided requirements
+- Testing framework contributors (Mocha, Chai, Sinon)
