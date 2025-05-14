@@ -4,6 +4,8 @@
 ![Tests](https://img.shields.io/badge/tests-21%20passing-brightgreen)
 ![License](https://img.shields.io/badge/license-Apache%202.0-blue)
 
+![Coverage Report](https://github.com/CallejaJ/hyperledger-seguros/blob/main/docs/images/coverage-report.png?raw=true)
+
 This project implements a smart contract for the management of insurance policies on a Hyperledger Fabric blockchain network.
 
 ## Prerequisites
