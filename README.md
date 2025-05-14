@@ -1,5 +1,9 @@
 # Insurance Chaincode for Hyperledger Fabric
 
+![Coverage](https://img.shields.io/badge/coverage-95.6%25-brightgreen)
+![Tests](https://img.shields.io/badge/tests-21%20passing-brightgreen)
+![License](https://img.shields.io/badge/license-Apache%202.0-blue)
+
 This project implements a smart contract for the management of insurance policies on a Hyperledger Fabric blockchain network.
 
 ## Prerequisites
