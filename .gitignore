@@ -1,2 +1,44 @@
+# Ignorar archivos y carpetas específicas
+
+# Dependencias
 node_modules/
-package-lock.json
+
+# Archivos de log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Reportes de cobertura
+coverage/
+.nyc_output/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Editor y IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos temporales
+*.tmp
+.temp/
+
+# Archivos de distribución
+dist/
+build/
+
+# Variables de entorno
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Archivos de Hyperledger Fabric
+wallet/
+identity/
+*.id
+*.tx

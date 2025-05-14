@@ -1,15 +1,20 @@
 {
   "name": "seguros",
   "version": "1.0.0",
-  "description": "",
+  "description": "Contrato inteligente para gestión de seguros en Hyperledger Fabric",
   "main": "index.js",
-  "type": "commonjs",
   "scripts": {
-    "test": "mocha",
-    "test:watch": "mocha --watch",
-    "start": "fabric-chaincode-node start"
+    "test": "mocha --recursive",
+    "test:coverage": "nyc mocha --recursive",
+    "test:watch": "mocha --recursive --watch",
+    "test:report": "nyc report --reporter=html"
   },
-  "keywords": [],
+  "keywords": [
+    "hyperledger",
+    "fabric",
+    "chaincode",
+    "insurance"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -19,7 +24,29 @@
   "devDependencies": {
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
     "sinon": "^15.2.0",
     "sinon-chai": "^3.7.0"
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "lib/**/*.js"
+    ],
+    "exclude": [
+      "test/**/*.js",
+      "node_modules/**/*.js",
+      "coverage/**/*.js"
+    ],
+    "reporter": [
+      "text",
+      "html",
+      "lcov"
+    ],
+    "check-coverage": true,
+    "lines": 85,
+    "functions": 85,
+    "branches": 80,
+    "statements": 85
   }
 }
